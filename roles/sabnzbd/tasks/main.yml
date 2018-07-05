@@ -108,6 +108,12 @@
 
 - replace:
     path: /opt/appdata/sabnzbd/sabnzbd.ini
+    regexp: "host_whitelist ="
+    replace: "host_whitelist = sabnzbd.{{domain.stdout}},"
+  when: sabnzbd_ini.stat.exists == False
+
+- replace:
+    path: /opt/appdata/sabnzbd/sabnzbd.ini
     regexp: nzb_backup_dir = ""
     replace: "nzb_backup_dir = /nzb"
   when: sabnzbd_ini.stat.exists == False
